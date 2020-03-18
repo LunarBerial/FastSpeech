@@ -51,4 +51,4 @@ class FastSpeech(nn.Module):
 if __name__ == "__main__":
     # Test
     model = FastSpeech()
-    print(sum(param.numel() for param in model.parameters()))
+    print(sum(param.numel() for param in model.parameters())) # numel 返回数组中元素个数

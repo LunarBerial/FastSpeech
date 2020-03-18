@@ -95,6 +95,7 @@ def main(args):
                 max_mel_len = data_of_batch["mel_max_len"]
 
                 # Forward
+                # 注意：此处训练时没有将标准的时长送入decoder，还是将length regular输出的时长送了进去，和论文的叙述不符
                 mel_output, mel_postnet_output, duration_predictor_output = model(character,
                                                                                   src_pos,
                                                                                   mel_pos=mel_pos,
@@ -111,6 +112,7 @@ def main(args):
                                                                             mel_target,
                                                                             D)
                 total_loss = mel_loss + mel_postnet_loss + duration_loss
+                # 三种loss的比例是1：1：1.
 
                 # Logger
                 t_l = total_loss.item()

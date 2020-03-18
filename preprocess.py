@@ -31,7 +31,7 @@ def write_metadata(metadata, out_dir):
 
 def main():
     path = os.path.join("data", "LJSpeech-1.1")
-    preprocess_ljspeech(path)
+    preprocess_ljspeech(path) # process g2p data.
 
     text_path = os.path.join("data", "train.txt")
     texts = process_text(text_path)
@@ -44,7 +44,7 @@ def main():
     num = 0
     for ind, text in enumerate(texts[num:]):
         print(ind)
-
+        # mel for wav was pre-extracted
         character = text[0:len(text)-1]
         mel_gt_name = os.path.join(
             hp.mel_ground_truth, "ljspeech-mel-%05d.npy" % (ind+num+1))
@@ -52,7 +52,7 @@ def main():
         _, _, D = load_data(character, mel_gt_target, tacotron2)
 
         np.save(os.path.join(hp.alignment_path, str(
-            ind+num) + ".npy"), D, allow_pickle=False)
+            ind+num) + ".npy"), D, allow_pickle=False) # get aliment data from pretrained tacotron2 model
 
 
 if __name__ == "__main__":
